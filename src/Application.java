@@ -1,3 +1,5 @@
+import utils.Patient;
+
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,7 +23,7 @@ public class Application
          * • Exit
          */
 
-        Scanner keyboard = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String[] menuOptions = {
                 "0. Add a new patient to the practice",
                 "1. Delete a patient from the practice",
@@ -38,7 +40,30 @@ public class Application
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
-                        //Add a new patient to the practice
+                        //Add a new patient to the practice (where there is already a patient
+                        // with that first name, last name and date of birth, the
+                        //user should be informed and the patient should not be added).
+                        System.out.println("Please fill in the following");
+                        System.out.println("first name");
+                        String firstName = scanner.next();
+
+                        System.out.println("last name");
+                        String lastName = scanner.next();
+
+                        System.out.println("Date of birth");
+                        String DOB = scanner.next();
+
+                        Patient patient = new Patient(firstName,lastName,DOB, );
+
+                        // not complete yet but this is to check if the patient has been added
+                        if (patient.equals(firstName))
+                        {
+                            System.out.println("Patient " + firstName + " has been added successfully.");
+                        }
+                        else
+                        {
+                            System.out.println("Error the patient has not been added.");
+                        }
                         break;
                     case 2:
                         // Delete a patient from the practice
