@@ -78,15 +78,7 @@ public class AppointmentLinkedList {
         return temp;
     }
 
-    /**
-     *
-     * Checks whether the list is empty.
-     *
-     * @return true,if the list is empty, otherwise false is returned.
-     */
-    public boolean isEmpty() {
-        return numElements == 0;
-    }
+
 
     /**
      * Inserts the specified element into the queue.
@@ -137,7 +129,15 @@ public class AppointmentLinkedList {
         }
         return isRemoved;
     }
-
+    /**
+     *
+     * Checks whether the list is empty.
+     *
+     * @return true,if the list is empty, otherwise false is returned.
+     */
+    public boolean isEmpty() {
+        return numElements == 0;
+    }
     protected static class Node {
         protected Appointment data;
         protected Node next;
