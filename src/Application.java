@@ -37,6 +37,10 @@ public class Application
         do {
             displayMenu(menuOptions, "Hospital menu");
             try {
+                String firstName;
+                String lastName;
+                // DOB stands for Date of Birth
+                String DOB;
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
@@ -45,17 +49,17 @@ public class Application
                         //user should be informed and the patient should not be added).
                         System.out.println("Please fill in the following");
                         System.out.println("first name");
-                        String firstName = scanner.next();
+                        firstName = scanner.next();
 
                         System.out.println("last name");
-                        String lastName = scanner.next();
+                        lastName = scanner.next();
 
                         System.out.println("Date of birth");
-                        String DOB = scanner.next();
-
-                        Patient patient = new Patient(firstName,lastName,DOB, );
+                        DOB = scanner.next();
 
                         // not complete yet but this is to check if the patient has been added
+                        Patient patient = new Patient(firstName,lastName,DOB);
+
                         if (patient.equals(firstName))
                         {
                             System.out.println("Patient " + firstName + " has been added successfully.");
@@ -67,6 +71,25 @@ public class Application
                         break;
                     case 2:
                         // Delete a patient from the practice
+                        System.out.println("Please fill in the following");
+                        System.out.println("first name");
+                        firstName = scanner.next();
+
+                        System.out.println("last name");
+                        lastName = scanner.next();
+
+                        System.out.println("Date of birth");
+                        DOB = scanner.next();
+
+                        // check to see if the patient is deleted
+                        if ()
+                        {
+                            System.out.println("Patient has been delete successfully.");
+                        }
+                        else
+                        {
+                            System.out.println("ERROR - patient has not been deleted from the practice.");
+                        }
                         break;
                     case 3:
                         // Display all patients
