@@ -24,6 +24,12 @@ public class Patient {
             this.appointment = appointment;
         }//
     }
+
+    public Patient()
+    {
+
+    }
+
     /**
      * These are the Accessor Methods
      */
