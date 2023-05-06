@@ -11,6 +11,7 @@ public class AppointmentLinkedList {
         first = null;
         last = null;
     }
+
     /**
      * a method called size, which returns the lists capacity
      *
@@ -19,6 +20,7 @@ public class AppointmentLinkedList {
     public int size() {
         return numElements;
     }
+
     /**
      *
      * Returns the element at the specified position in the List.
@@ -45,7 +47,8 @@ public class AppointmentLinkedList {
      *
      * @param value, which is used to search the list for a matching Appointment
      *
-     * @return count, which is the number of where the Appointment appears on the list
+     * @return count, which is the number of where the Appointment appears on the
+     *         list
      */
     public int indexOf(Appointment value) {
         Node current = first;
@@ -67,38 +70,12 @@ public class AppointmentLinkedList {
             throw new IndexOutOfBoundsException("Invalid position supplied");
         }
         Node current = first;
-  for (int i=0;i<pos;i++){
-      current=current.next;
-  }
-        Appointment temp = current.data;
-  current.data=temp;
-        return temp;
-    }
-
-
-    /**
-     *
-     * Checks whether the list is empty.
-     *
-     * @return true,if the list is empty, otherwise false is returned.
-     */
-    public boolean isEmpty() {
-        return numElements == 0;
-    }
-
-    /**
-     *
-     * Returns the first element in the queue without removing it.
-     *
-     * @return the first element in the queue.
-     * @throws NoSuchElementException if the queue is empty.
-     */
-    public Appointment peek() {
-        Node current = first;
-        if (isEmpty()) {
-            throw new NoSuchElementException();
+        for (int i = 0; i < pos; i++) {
+            current = current.next;
         }
-        return current.data;
+        Appointment temp = current.data;
+        current.data = temp;
+        return temp;
     }
 
 
@@ -107,9 +84,9 @@ public class AppointmentLinkedList {
      * Inserts the specified element into the queue.
      *
      * @param data the element to be inserted.
-     * @return true,if the element was successfully inserted, otherwise
-     *         false.
-     * @throws DuplicateAppointmentException if the Appointment already exists in the queue.
+     * @return true,if the element was successfully inserted, otherwise false.
+     * @throws DuplicateAppointmentException if the Appointment already exists in
+     *                                       the List.
      */
     public boolean add(Appointment data) throws DuplicateAppointmentException {
         Node newNode = new Node(data);
@@ -126,24 +103,41 @@ public class AppointmentLinkedList {
 
     /**
      *
-     * Removes and returns the first element in the queue.
+     * Removes and returns the first element in the List.
      *
-     * @return the first element in the queue.
-     * @throws NoSuchElementException if the queue is empty.
+     * @return the first element in the List.
+     * @throws NoSuchElementException if the List is empty.
      */
-    public Appointment remove() {
-        Appointment temp = null;
-        if (isEmpty()) {
-            throw new NoSuchElementException("Element dosen't exist, Queue is Empty");
-        } else {
-            temp = first.next;
+    public boolean remove(Appointment data) {
+        boolean isRemoved = false;
+        if (first.data.equals(data)) {
             first = first.next;
+            numElements--;
+            isRemoved = true;
         }
-        numElements--;
-        return temp;
+        Node current = first.next;
+        Node previous = first;
+
+        while (current != null) {
+            if (current.data.equals(data)) {
+                previous.next = current.next;
+                numElements--;
+                isRemoved = true;
+            }
+            previous = current;
+            current = current.next;
+        }
+        return isRemoved;
     }
-
-
+    /**
+     *
+     * Checks whether the list is empty.
+     *
+     * @return true,if the list is empty, otherwise false is returned.
+     */
+    public boolean isEmpty() {
+        return numElements == 0;
+    }
     protected static class Node {
         protected Appointment data;
         protected Node next;
