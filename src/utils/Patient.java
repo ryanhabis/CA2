@@ -2,6 +2,7 @@ package utils;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Patient {
     private String firstName;
@@ -78,6 +79,54 @@ public class Patient {
 
     public void setAppointment(LinkedList appointment) {
         this.appointment = appointment;
+    }
+
+    /**
+     *
+     * Computes the hash code of the Patient, based on their
+     * name details and their date of birth
+     *
+     * @return The hash code of this task.
+     */
+    @Override
+    public int hashCode() {
+        int hash = 8;
+        hash = 90 * hash + Objects.hashCode(this.firstName);
+        hash = 90 * hash + Objects.hashCode(this.surName);
+        hash = 90 * hash + Objects.hashCode(this.dob);
+        return hash;
+    }
+
+    /**
+     *
+     * Determines whether this Patient is equal to another Patient object based on their
+     * name details and their date of birth
+     *
+     * @param obj The other object to compare with.
+     * @return {@code true} if the Patient objects are equal, {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Patient other = (Patient) obj;
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.surName, other.surName)) {
+            return false;
+        }
+        if (!Objects.equals(this.dob, other.dob)) {
+            return false;
+        }
+        return true;
     }
 
 }
