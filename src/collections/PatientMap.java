@@ -17,6 +17,8 @@ public class PatientMap
     private static final int DEFAULT_CAPACITY = 103;
     private Entry[] data;
     private int size;
+    private HashMap<String, Patient> patientMap = new HashMap<>();
+
 
 
     /**
@@ -145,6 +147,12 @@ public class PatientMap
             System.out.println("Patient " + firstName + " " + lastName + " was not found in the system.");
         }
     }
+    public void displayAllPatients(HashMap<String, Patient> patientMap) {
+        for (Patient patient : patientMap.values()) {
+            System.out.println(patient);
+        }
+    }
+
     /**
      This is a static inner class representing an entry in the collections.PatientMap.
      Each Entry object contains a key-value pair.
