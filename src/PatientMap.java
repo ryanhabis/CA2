@@ -127,7 +127,20 @@ public class PatientMap
 
         return newMap;
     }
+    public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName , String DOB) {
+        // Construct the key by concatenating first and last name
+        String key = firstName + " " + lastName;
 
+        // Use the remove() method to remove the entry with the given key
+        Patient removedPatient = patientMap.remove(key);
+
+        // Check if the remove() method returned a non-null value, indicating that a patient was removed
+        if (removedPatient != null) {
+            System.out.println("Patient " + firstName + " " + lastName + " has been removed successfully.");
+        } else {
+            System.out.println("Patient " + firstName + " " + lastName + " was not found in the system.");
+        }
+    }
     /**
      This is a static inner class representing an entry in the PatientMap.
      Each Entry object contains a key-value pair.
@@ -175,20 +188,7 @@ public class PatientMap
             return oldValue;
         }
 
-        public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName, String dateOfBirth) {
-            // Construct the key by concatenating first name, last name, and date of birth
-            String key = firstName + " " + lastName + " " + dateOfBirth;
 
-            // Use the remove() method to remove the entry with the given key
-            Patient removedPatient = patientMap.remove(key);
-
-            // Check if the remove() method returned a non-null value, indicating that a patient was removed
-            if (removedPatient != null) {
-                System.out.println("Patient " + firstName + " " + lastName + " with date of birth " + dateOfBirth + " has been removed successfully.");
-            } else {
-                System.out.println("Patient " + firstName + " " + lastName + " with date of birth " + dateOfBirth + " was not found in the system.");
-            }
-        }
 
     }
 }

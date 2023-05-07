@@ -92,25 +92,11 @@ public class Application
 
                          dob = LocalDate.parse(DOB);
 
-                         // not working
-                        boolean patientDeleted = false;
-                        for (Patient pat : patients) {
-                            if (pat.getFirstName().equals(firstName) &&
-                                    pat.getSurName().equals(lastName) &&
-                                    pat.getDob().equals(dob)) {
-                                patients.remove(pat);
-                                patientDeleted = true;
-                                break;
-                            }
-                        }
+                        PatientMap patientMap = new PatientMap();
 
-                        if (patientDeleted) {
-                            System.out.println("Patient has been deleted successfully.");
-                        } else {
-                            System.out.println("ERROR - patient has not been deleted from the practice.");
-                        }
-
+                        patientMap.removePatient(patient.getAppointment(), firstName, lastName, dob);
                         break;
+
                     case 3:
                         // Display all patients
                         System.out.println("List of patients:");
