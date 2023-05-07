@@ -68,7 +68,6 @@ public class PriorityQueueTest {
         Appointment a1 = new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),5,"Dr McCardle");
         Appointment a2 = new Appointment("Mary", "Blogg", LocalDate.of(2000, 1, 15),"Mild Code", LocalDate.of(2023, 5, 15),1,"Dr McCardle");
         PriorityQueue appointments = new PriorityQueue();
-        System.out.println("add, where a Task is Added to the End of the Queue");
         appointments.add(a1);
         boolean expected = true;
         boolean actual = appointments.add(a2);
