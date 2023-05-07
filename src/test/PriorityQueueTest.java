@@ -9,6 +9,7 @@ import utils.Appointment;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PriorityQueueTest {
 
@@ -101,6 +102,23 @@ public class PriorityQueueTest {
         Appointment resultTask = appointments.remove();
         assertEquals(a2, resultTask);
     }
+    /**
+     * This tests the add method, of class PriorityQueue, where the Appointment
+     * Objects are equal
+     *
+     * @throws DuplicateAppointmentException, to ensure there is unique Appointments present
+     */
+    @Test
+    public void add_WhereTwoAppointmentsAreEqualTest() throws DuplicateAppointmentException {
+        System.out.println("add, Testing to add a Appointment where two Appointment are equal");
+        Appointment a1= new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle");
+        Appointment a2= new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle");
+        PriorityQueue appointments = new PriorityQueue();
 
+        appointments.add(a1);
 
+        Throwable thrown = assertThrows(DuplicateAppointmentException.class, () -> {appointments.add(a2);
+        });
+        assertEquals("The Appointment has Already been booked", thrown.getMessage());
+    }
 }

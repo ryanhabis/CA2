@@ -16,9 +16,10 @@ public class PriorityQueue extends AppointmentLinkedList {
 
     /**
      *
-     * Adds a new task to the collections.test.PriorityQueue.
+     * Adds a new task to the PriorityQueue. It checks the first and last node before tranversing
+     * through the list checking if it contains any duplicates
      *
-     * @param app, the Appointment to add to the collections.test.PriorityQueue.
+     * @param app, the Appointment to add to the PriorityQueue.
      *
      * @return true, if the Appointment was added otherwise false is returned.
      *
@@ -40,13 +41,17 @@ public class PriorityQueue extends AppointmentLinkedList {
             Node current = first.next;
             Node previous = first;
 
+            if (first.data.equals(app)) {
+                throw new DuplicateAppointmentException();
+            }
             while (current != null && current.data.compareTo(app) >0) {
+                if (current.data.equals(app)) {
+                    throw new DuplicateAppointmentException();
+                }
                 previous = current;
                 current = current.next;
             }
-            if (current.data.equals(app)) {
-                throw new DuplicateAppointmentException();
-            }
+
             previous.next = newNode;
             newNode.next = current;
         }
@@ -57,17 +62,18 @@ public class PriorityQueue extends AppointmentLinkedList {
 
     /**
      *
-     * Removes all Appointment instances per the Patient details
+     * Removes all Appointment instances per the Patient details, checking if the Queue is empty
+     * before tranversing the PriorityQueues Nodes
      *
-     * @param fName, the Appointment to add to the collections.test.PriorityQueue.
-     * @param sName, the Appointment to add to the collections.test.PriorityQueue.
-     * @param dob,   the Appointment to add to the collections.test.PriorityQueue.
+     * @param fName, the Patients Firstname
+     * @param sName, the Patients Surname
+     * @param dob,   the Patients dob
      *
      *
      * @return true, if the Appointment was removed otherwise false is returned.
      *
      */
-    public boolean removeAppointment(String fName, String sName, LocalDate dob) throws DuplicateAppointmentException,IllegalStateException {
+    public boolean removeAppointment(String fName, String sName, LocalDate dob) {
         if (isEmpty()) {
             return false;
         }
