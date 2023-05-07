@@ -1,5 +1,6 @@
 package collections;
 
+import Exceptions.DuplicateAppointmentException;
 import utils.Appointment;
 
 import java.util.NoSuchElementException;
@@ -104,7 +105,7 @@ public class AppointmentLinkedList {
      * @param data the Appointment to be inserted.
      * @return true,if the element was successfully inserted, otherwise false.
      */
-    public boolean add(Appointment data) throws DuplicateAppointmentException {
+    public boolean add(Appointment data) throws DuplicateAppointmentException, DuplicateAppointmentException {
         Node newNode = new Node(data);
         if (isEmpty()) {
             first = newNode;
