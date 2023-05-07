@@ -1,3 +1,5 @@
+package collections;
+
 import utils.Appointment;
 
 import java.util.NoSuchElementException;

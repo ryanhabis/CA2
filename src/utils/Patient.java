@@ -2,6 +2,8 @@ package utils;
 
 
 
+//import collections.AppointmentLinkedList;
+
 import collections.AppointmentLinkedList;
 
 import java.time.LocalDate;
@@ -12,7 +14,7 @@ public class Patient {
     private String surName;
     private LocalDate dob;
     private LocalDate date;
-    private AppointmentLinkedList appointment;
+//    private AppointmentLinkedList appointment;
 
     public Patient(String firstName, String surName, LocalDate dob, LocalDate date, AppointmentLinkedList appointment) {
         if (dob.compareTo(LocalDate.now()) > 0) {
