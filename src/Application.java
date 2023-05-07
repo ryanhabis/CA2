@@ -1,4 +1,4 @@
-import collections.AppointmentLinkedList;
+//import collections.AppointmentLinkedList;
 import collections.PatientMap;
 import utils.Appointment;
 import utils.Patient;
@@ -50,7 +50,6 @@ public class Application
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
-
                         /*
                         --------------------------------------------------------------
                                         Double check this code plz
@@ -72,7 +71,7 @@ public class Application
                         LocalDate dob = LocalDate.parse(DOB);
                         LocalDate signUpDate = LocalDate.now();
                         LinkedList appointments = new LinkedList();
-                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointments);
+                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointment);
 
                         if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))
                         {
@@ -108,7 +107,7 @@ public class Application
                     case 3:
                         // Display all patients
                         System.out.println("List of patients:");
-                        patient.displayAllPatients();
+                        patientMap.displayAllPatients(patient);
                         break;
                     case 4:
                         // Create a new appointment for a specific patient and add it to the queue

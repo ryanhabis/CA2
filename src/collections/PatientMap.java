@@ -3,7 +3,6 @@ package collections;
 import Exceptions.MapFullException;
 import Exceptions.SlotOccupiedException;
 import utils.Patient;
-
 import java.util.HashMap;
 
 /**
@@ -50,7 +49,6 @@ public class PatientMap
     }
 
     /**
-
      Computes the hash code for a given key.
      @param key the key to be hashed
      @return the hash code for the key
@@ -133,6 +131,7 @@ public class PatientMap
 
         return newMap;
     }
+
     public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName , String DOB) {
         // Construct the key by concatenating first and last name
         String key = firstName + " " + lastName;
@@ -152,6 +151,8 @@ public class PatientMap
             System.out.println(patient);
         }
     }
+
+
 
     /**
      This is a static inner class representing an entry in the collections.PatientMap.
