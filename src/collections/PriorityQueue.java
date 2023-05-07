@@ -5,6 +5,7 @@ import collections.AppointmentLinkedList;
 import utils.Appointment;
 
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
 
 public class PriorityQueue extends AppointmentLinkedList {
 
@@ -15,15 +16,15 @@ public class PriorityQueue extends AppointmentLinkedList {
 
     /**
      *
-     * Adds a new task to the collections.PriorityQueue.
+     * Adds a new task to the collections.test.PriorityQueue.
      *
-     * @param app, the Appointment to add to the collections.PriorityQueue.
+     * @param app, the Appointment to add to the collections.test.PriorityQueue.
      *
      * @return true, if the Appointment was added otherwise false is returned.
      *
      */
     @Override
-    public boolean add(Appointment app) throws DuplicateAppointmentException {
+    public boolean add(Appointment app) throws DuplicateAppointmentException,IllegalStateException {
         Node newNode = new Node(app);
         if (isEmpty()) {
             first = newNode;
@@ -32,21 +33,20 @@ public class PriorityQueue extends AppointmentLinkedList {
         } else if (first.data.compareTo(app) < 0) {
             newNode.next = first;
             first = newNode;
-        } else if (last.data.compareTo(app) >= 0) {
+        } else if (last.data.compareTo(app) > 0) {
             last.next = newNode;
             last = newNode;
         } else {
             Node current = first.next;
             Node previous = first;
 
-            while (current != null && current.data.compareTo(app) >= 0) {
-                if (current.data.equals(app)) {
-                    throw new DuplicateAppointmentException("Appointment already exits");
-                }
+            while (current != null && current.data.compareTo(app) >0) {
                 previous = current;
                 current = current.next;
             }
-
+            if (current.data.equals(app)) {
+                throw new DuplicateAppointmentException();
+            }
             previous.next = newNode;
             newNode.next = current;
         }
@@ -59,15 +59,15 @@ public class PriorityQueue extends AppointmentLinkedList {
      *
      * Removes all Appointment instances per the Patient details
      *
-     * @param fName, the Appointment to add to the collections.PriorityQueue.
-     * @param sName, the Appointment to add to the collections.PriorityQueue.
-     * @param dob,   the Appointment to add to the collections.PriorityQueue.
+     * @param fName, the Appointment to add to the collections.test.PriorityQueue.
+     * @param sName, the Appointment to add to the collections.test.PriorityQueue.
+     * @param dob,   the Appointment to add to the collections.test.PriorityQueue.
      *
      *
      * @return true, if the Appointment was removed otherwise false is returned.
      *
      */
-    public boolean removeAppointment(String fName, String sName, LocalDate dob) throws DuplicateAppointmentException {
+    public boolean removeAppointment(String fName, String sName, LocalDate dob) throws DuplicateAppointmentException,IllegalStateException {
         if (isEmpty()) {
             return false;
         }
@@ -94,6 +94,25 @@ public class PriorityQueue extends AppointmentLinkedList {
         return false;
 
     }
+    /**
+     *
+     * Removes and returns the first Appointment in the queue.
+     *
+     * @return the first Appointment in the queue.
+     * @throws NoSuchElementException if the queue is empty.
+     */
+    public Appointment remove() {
+        Appointment app = null;
+        if (isEmpty()) {
+            throw new NoSuchElementException("Element dosen't exist, Queue is Empty");
+        } else {
+            app = first.data;
+            first = first.next;
+        }
+        numElements--;
+        return app;
+    }
+
 
     @Override
     public Appointment get(int pos) {
