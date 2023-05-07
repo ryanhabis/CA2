@@ -1,4 +1,5 @@
 //import collections.AppointmentLinkedList;
+import collections.AppointmentLinkedList;
 import collections.PatientMap;
 import utils.Appointment;
 import utils.Patient;
@@ -50,11 +51,6 @@ public class Application
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
-                        /*
-                        --------------------------------------------------------------
-                                        Double check this code plz
-                        --------------------------------------------------------------
-                         */
                         //Add a new patient to the practice (where there is already a patient
                         // with that first name, last name and date of birth, the
                         //user should be informed and the patient should not be added).
@@ -71,9 +67,9 @@ public class Application
                         LocalDate dob = LocalDate.parse(DOB);
                         LocalDate signUpDate = LocalDate.now();
                         LinkedList appointments = new LinkedList();
-                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointment);
+                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, new AppointmentLinkedList());
 
-                        if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))
+                        if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, new AppointmentLinkedList())))
                         {
                             System.out.println("Patient " + firstName + " has been added successfully.");
                         }
@@ -111,9 +107,11 @@ public class Application
                         break;
                     case 4:
                         // Create a new appointment for a specific patient and add it to the queue
+
                         break;
                     case 5:
                         // Call the next patient in
+
                         break;
                 }
             }
