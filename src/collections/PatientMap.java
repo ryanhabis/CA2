@@ -1,9 +1,13 @@
+package collections;
+
+import Exceptions.MapFullException;
+import Exceptions.SlotOccupiedException;
 import utils.Patient;
 
 import java.util.HashMap;
 
 /**
- The PatientMap class implements a hash map data structure to store patient data. The class supports adding and
+ The collections.PatientMap class implements a hash map data structure to store patient data. The class supports adding and
  retrieving patient data using key-value pairs.
  */
 
@@ -16,7 +20,7 @@ public class PatientMap
 
 
     /**
-     Constructor for PatientMap class with default capacity.
+     Constructor for collections.PatientMap class with default capacity.
      */
     public PatientMap() {
         data = new Entry[DEFAULT_CAPACITY];
@@ -24,7 +28,7 @@ public class PatientMap
     }
 
     /**
-     Constructor for PatientMap class with user-defined capacity.
+     Constructor for collections.PatientMap class with user-defined capacity.
      @param capacity the maximum capacity of the map
      @throws IllegalArgumentException if capacity is less than or equal to zero
      */
@@ -127,9 +131,22 @@ public class PatientMap
 
         return newMap;
     }
+    public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName , String DOB) {
+        // Construct the key by concatenating first and last name
+        String key = firstName + " " + lastName;
 
+        // Use the remove() method to remove the entry with the given key
+        Patient removedPatient = patientMap.remove(key);
+
+        // Check if the remove() method returned a non-null value, indicating that a patient was removed
+        if (removedPatient != null) {
+            System.out.println("Patient " + firstName + " " + lastName + " has been removed successfully.");
+        } else {
+            System.out.println("Patient " + firstName + " " + lastName + " was not found in the system.");
+        }
+    }
     /**
-     This is a static inner class representing an entry in the PatientMap.
+     This is a static inner class representing an entry in the collections.PatientMap.
      Each Entry object contains a key-value pair.
      */
     private static class Entry{
@@ -175,20 +192,7 @@ public class PatientMap
             return oldValue;
         }
 
-        public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName, String dateOfBirth) {
-            // Construct the key by concatenating first name, last name, and date of birth
-            String key = firstName + " " + lastName + " " + dateOfBirth;
 
-            // Use the remove() method to remove the entry with the given key
-            Patient removedPatient = patientMap.remove(key);
-
-            // Check if the remove() method returned a non-null value, indicating that a patient was removed
-            if (removedPatient != null) {
-                System.out.println("Patient " + firstName + " " + lastName + " with date of birth " + dateOfBirth + " has been removed successfully.");
-            } else {
-                System.out.println("Patient " + firstName + " " + lastName + " with date of birth " + dateOfBirth + " was not found in the system.");
-            }
-        }
 
     }
 }

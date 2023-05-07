@@ -1,5 +1,4 @@
 import collections.AppointmentLinkedList;
-import collections.PriorityQueue;
 import utils.Appointment;
 import utils.Patient;
 import java.io.FileNotFoundException;
@@ -69,7 +68,7 @@ public class Application
 
                         LocalDate dob = LocalDate.parse(DOB);
                         LocalDate signUpDate = LocalDate.now();
-                        PriorityQueue appointments = new PriorityQueue();
+                        AppointmentLinkedList appointments = new AppointmentLinkedList();
                         Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointments);
 
                         if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))

@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class MapFullException extends RuntimeException{
     public MapFullException(String message){
         super(message);

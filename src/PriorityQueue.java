@@ -16,7 +16,7 @@ public class PriorityQueue extends AppointmentLinkedList{
      *
      */
     @Override
-    public boolean add(Appointment app) throws {
+    public boolean add(Appointment app)  {
         Node newNode = new Node(app);
         if(isEmpty()){
             first = newNode;

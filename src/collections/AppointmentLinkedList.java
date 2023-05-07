@@ -1,6 +1,3 @@
-package collections;
-
-import Exceptions.DuplicateAppointmentException;
 import utils.Appointment;
 
 import java.util.NoSuchElementException;
@@ -11,7 +8,7 @@ public class AppointmentLinkedList {
     protected Node last;
 
     /**
-     * An collections.AppointmentLinkedList class setting first and last
+     * An AppointmentLinkedList class setting first and last
      * Nodes to null
      */
     public AppointmentLinkedList() {
