@@ -1,6 +1,7 @@
 //import collections.AppointmentLinkedList;
 import collections.AppointmentLinkedList;
 import collections.PatientMap;
+import collections.PriorityQueue;
 import utils.Appointment;
 import utils.Patient;
 import java.io.FileNotFoundException;
@@ -47,7 +48,6 @@ public class Application
                 String lastName;
                 // DOB stands for Date of Birth
                 String DOB;
-                PatientMap patientMap = new PatientMap();
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
@@ -66,10 +66,10 @@ public class Application
 
                         LocalDate dob = LocalDate.parse(DOB);
                         LocalDate signUpDate = LocalDate.now();
-                        LinkedList appointments = new LinkedList();
-                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, new AppointmentLinkedList());
+                        PriorityQueue appointments = new PriorityQueue();
+                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointments);
 
-                        if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, new AppointmentLinkedList())))
+                        if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))
                         {
                             System.out.println("Patient " + firstName + " has been added successfully.");
                         }
@@ -90,21 +90,24 @@ public class Application
                         DOB = scanner.next();
 
                          dob = LocalDate.parse(DOB);
-                        PatientMap patientDeleted = new PatientMap();
 
-                        patientDeleted.removePatient(patient, firstName,lastName,DOB);
-                        if (!patient.equals(firstName)) {
+                        Patient patient1 = new Patient(firstName, lastName, dob, LocalDate.now(), new PriorityQueue());
+
+                        try {
+                            PatientMap.removePatient(patient1,1);
                             System.out.println("Patient has been deleted successfully.");
-                        } else {
+                        } catch (PatientNotFoundException e) {
                             System.out.println("ERROR - patient has not been deleted from the practice.");
                         }
 
                         break;
                     case 3:
-                        // Display all patients
-                        System.out.println("List of patients:");
-                        patientMap.displayAllPatients(patient);
-                        break;
+                        HashMap<String, Patient> patientMap = new HashMap<>();
+                        // populate the map with patients
+
+                        PatientMap patientManager = new PatientMap();
+                        patientManager.displayAllPatients(patientMap);
+
                     case 4:
                         // Create a new appointment for a specific patient and add it to the queue
 

@@ -27,7 +27,7 @@ public class Patient {
             this.dob = dob;
             this.date = date;
             this.appointment = appointment;
-        }//
+        }
     }
 
     public Patient()
