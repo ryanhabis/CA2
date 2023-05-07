@@ -1,9 +1,10 @@
 import collections.AppointmentLinkedList;
-import collections.PatientMap;
+import utils.Appointment;
 import utils.Patient;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Application
@@ -62,7 +63,7 @@ public class Application
                         System.out.println("last name");
                         lastName = scanner.next();
 
-                        System.out.println("Date of birth within this format (year-month-day)");
+                        System.out.println("Date of birth within this format (2023-01-01)");
                         DOB = scanner.next();
 
                         LocalDate dob = LocalDate.parse(DOB);
@@ -92,11 +93,25 @@ public class Application
 
                          dob = LocalDate.parse(DOB);
 
-                        PatientMap patientMap = new PatientMap();
+                         // not working
+                        boolean patientDeleted = false;
+                        for (Patient pat : patients) {
+                            if (pat.getFirstName().equals(firstName) &&
+                                    pat.getSurName().equals(lastName) &&
+                                    pat.getDob().equals(dob)) {
+                                patients.remove(pat);
+                                patientDeleted = true;
+                                break;
+                            }
+                        }
 
-                        patientMap.removePatient(patient.getAppointment(), firstName, lastName, dob);
+                        if (patientDeleted) {
+                            System.out.println("Patient has been deleted successfully.");
+                        } else {
+                            System.out.println("ERROR - patient has not been deleted from the practice.");
+                        }
+
                         break;
-
                     case 3:
                         // Display all patients
                         System.out.println("List of patients:");
