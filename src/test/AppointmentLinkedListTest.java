@@ -54,6 +54,46 @@ public class AppointmentLinkedListTest {
     }
 
     /**
+     * This tests the indexOf method, of class AppointmentLinkedList, where there the
+     * Appointment is Valid
+     *
+     * @throws DuplicateAppointmentException, to ensure there is unique Appointments present
+     */
+    @Test
+    public void indexOf_LinkedListValidAppointmentTest() throws DuplicateAppointmentException {
+        Appointment s = new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle");
+        AppointmentLinkedList appointments = new AppointmentLinkedList();
+        appointments.add(new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle"));
+        appointments.add(new Appointment("Matt", "Quinn", LocalDate.of(2002, 2, 25),"Cough", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
+        appointments.add(new Appointment("Mary", "Bloggs", LocalDate.of(2001, 4, 21),"Headache", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
+
+        int expResult = 0;
+        int result = appointments.indexOf(s);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * This tests the indexOf method, of class AppointmentLinkedList, where there is
+     * Appointments present and the Appointment is invalid
+     *
+     * @throws DuplicateAppointmentException, to ensure there is unique Appointments present
+     */
+    @Test
+    public void testIndexOf_SongNotInList() throws DuplicateAppointmentException {
+
+        Appointment a = new Appointment("Joe", "Bloggs2", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle");
+        AppointmentLinkedList appointments = new AppointmentLinkedList();
+        appointments.add(new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle"));
+        appointments.add(new Appointment("Matt", "Quinn", LocalDate.of(2002, 2, 25),"Cough", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
+        appointments.add(new Appointment("Mary", "Bloggs", LocalDate.of(2001, 4, 21),"Headache", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
+
+        int expResult = -1;
+        int result = appointments.indexOf(a);
+        assertEquals(expResult, result);
+    }
+
+
+    /**
      * This tests the get method, of class AppointmentLinkedList, where there is
      * the middle Appointment
      *
@@ -61,13 +101,13 @@ public class AppointmentLinkedListTest {
      */
     @Test
     public void get_LinkedListMiddleAppointment() throws DuplicateAppointmentException {
-        AppointmentLinkedList instance = new AppointmentLinkedList();
-        instance.add(new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle"));
-        instance.add(new Appointment("Matt", "Quinn", LocalDate.of(2002, 2, 25),"Cough", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
-        instance.add(new Appointment("Mary", "Bloggs", LocalDate.of(2001, 4, 21),"Headache", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
+        AppointmentLinkedList appointments = new AppointmentLinkedList();
+        appointments.add(new Appointment("Joe", "Bloggs", LocalDate.of(2000, 6, 15),"Severe Neck Pain", LocalDate.of(2023, 5, 15),4,"Dr McCardle"));
+        appointments.add(new Appointment("Matt", "Quinn", LocalDate.of(2002, 2, 25),"Cough", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
+        appointments.add(new Appointment("Mary", "Bloggs", LocalDate.of(2001, 4, 21),"Headache", LocalDate.of(2023, 5, 15),1,"Dr McCardle"));
 
         Appointment expResult = new Appointment("Matt", "Quinn", LocalDate.of(2002, 2, 25),"Cough", LocalDate.of(2023, 5, 15),1,"Dr McCardle");
-        Appointment result = instance.get(1);
+        Appointment result = appointments.get(1);
         assertEquals(expResult, result);
     }
 
