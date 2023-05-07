@@ -94,11 +94,11 @@ public class Application
 
                          // not working
                         boolean patientDeleted = false;
-                        for (Patient patient : patients) {
-                            if (patient.getFirstName().equals(firstName) &&
-                                    patient.getSurName().equals(lastName) &&
-                                    patient.getDob().equals(dob)) {
-                                patients.remove(patient);
+                        for (Patient pat : patients) {
+                            if (pat.getFirstName().equals(firstName) &&
+                                    pat.getSurName().equals(lastName) &&
+                                    pat.getDob().equals(dob)) {
+                                patients.remove(pat);
                                 patientDeleted = true;
                                 break;
                             }
@@ -116,12 +116,12 @@ public class Application
                         System.out.println("List of patients:");
 
                         //broken forloop
-                        for (Patient patient : patients) {
-                            System.out.println("First Name: " + patient.getFirstName());
-                            System.out.println("Last Name: " + patient.getSurName());
-                            System.out.println("Date of Birth: " + patient.getDob());
-                            System.out.println("Sign Up Date: " + patient.getDate());
-                            System.out.println("Appointments: " + patient.getAppointment());
+                        for (Patient pat : patients) {
+                            System.out.println("First Name: " + pat.getFirstName());
+                            System.out.println("Last Name: " + pat.getSurName());
+                            System.out.println("Date of Birth: " + pat.getDob());
+                            System.out.println("Sign Up Date: " + pat.getDate());
+                            System.out.println("Appointments: " + pat.getAppointment());
                             System.out.println("---------------------------------------");
                         }
 
