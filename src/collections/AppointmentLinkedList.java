@@ -1,5 +1,6 @@
 package collections;
 
+import Exceptions.DuplicateAppointmentException;
 import utils.Appointment;
 
 import java.util.NoSuchElementException;
