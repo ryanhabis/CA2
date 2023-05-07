@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PatientMapTest
 {
+    /**
+     * Checks if the PatientMap has added one to the size
+     */
     @Test
     public void testSize() {
         PatientMap patientMap = new PatientMap();
@@ -17,6 +20,9 @@ class PatientMapTest
         assertEquals(1, patientMap.size());
     }
 
+    /**
+     * tests to see if the value is there once its added.
+     */
     @Test
     public void testPut()
     {
