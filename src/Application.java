@@ -1,7 +1,9 @@
+import utils.Appointment;
 import utils.Patient;
-
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Application
@@ -44,6 +46,12 @@ public class Application
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
+
+                        /*
+                        --------------------------------------------------------------
+                                        Double check this code plz
+                        --------------------------------------------------------------
+                         */
                         //Add a new patient to the practice (where there is already a patient
                         // with that first name, last name and date of birth, the
                         //user should be informed and the patient should not be added).
@@ -54,13 +62,15 @@ public class Application
                         System.out.println("last name");
                         lastName = scanner.next();
 
-                        System.out.println("Date of birth");
+                        System.out.println("Date of birth within this format (2023-01-01)");
                         DOB = scanner.next();
 
-                        // not complete yet but this is to check if the patient has been added
-                        Patient patient = new Patient(firstName,lastName,DOB);
+                        LocalDate dob = LocalDate.parse(DOB);
+                        LocalDate signUpDate = LocalDate.now();
+                        LinkedList<Appointment> appointments = new LinkedList<>();
+                        Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointments);
 
-                        if (patient.equals(firstName))
+                        if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))
                         {
                             System.out.println("Patient " + firstName + " has been added successfully.");
                         }
@@ -70,7 +80,6 @@ public class Application
                         }
                         break;
                     case 2:
-                        // Delete a patient from the practice
                         System.out.println("Please fill in the following");
                         System.out.println("first name");
                         firstName = scanner.next();
@@ -81,18 +90,41 @@ public class Application
                         System.out.println("Date of birth");
                         DOB = scanner.next();
 
-                        // check to see if the patient is deleted
-                        if ()
-                        {
-                            System.out.println("Patient has been delete successfully.");
+                         dob = LocalDate.parse(DOB);
+
+                         // not working
+                        boolean patientDeleted = false;
+                        for (Patient patient : patients) {
+                            if (patient.getFirstName().equals(firstName) &&
+                                    patient.getSurName().equals(lastName) &&
+                                    patient.getDob().equals(dob)) {
+                                patients.remove(patient);
+                                patientDeleted = true;
+                                break;
+                            }
                         }
-                        else
-                        {
+
+                        if (patientDeleted) {
+                            System.out.println("Patient has been deleted successfully.");
+                        } else {
                             System.out.println("ERROR - patient has not been deleted from the practice.");
                         }
+
                         break;
                     case 3:
                         // Display all patients
+                        System.out.println("List of patients:");
+
+                        //broken forloop
+                        for (Patient patient : patients) {
+                            System.out.println("First Name: " + patient.getFirstName());
+                            System.out.println("Last Name: " + patient.getSurName());
+                            System.out.println("Date of Birth: " + patient.getDob());
+                            System.out.println("Sign Up Date: " + patient.getDate());
+                            System.out.println("Appointments: " + patient.getAppointment());
+                            System.out.println("---------------------------------------");
+                        }
+
                         break;
                     case 4:
                         // Create a new appointment for a specific patient and add it to the queue

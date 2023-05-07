@@ -72,6 +72,7 @@ public class PatientMap
         System.out.println("Size of map: " + size + ", capacity: " + data.length);
         System.out.println("Slot calculated: " + slot);
 
+        // Below uses list based chaining collision
         if(data[slot] == null){
             Entry newEntry = new Entry(key, value);
             data[slot] = newEntry;
