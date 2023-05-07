@@ -27,6 +27,7 @@ public class Appointment implements Comparable<Appointment> {
     private String doctor;
 
     /**
+     *
      * Constructs a new Appointment with the specified Patient data, issue,date and
      * trigageLevel.
      *
@@ -37,12 +38,13 @@ public class Appointment implements Comparable<Appointment> {
      * @param date,        the date of the Appointment
      * @param triageLevel, the importance level of the Appointment
      * @param doctor,      the doctors name
+     *
      * @throws IllegalArgumentException If the date of birth and the date is in the
      *                                  past.
      */
     public Appointment(String firstName, String surName, LocalDate dob, String issue, LocalDate date, int triageLevel,
                        String doctor) {
-        if (dob.compareTo(LocalDate.now()) <= 0) {
+        if (dob.compareTo(LocalDate.now()) > 0) {
             throw new IllegalArgumentException("Date of Birth cannot be after today");
         } else if (date.compareTo(LocalDate.now()) < 0) {
             throw new IllegalArgumentException("Appointment Date cannot be in the past");
@@ -55,6 +57,90 @@ public class Appointment implements Comparable<Appointment> {
             this.triageLevel = triageLevel;
             this.doctor = doctor;
         }
+    }
+
+    /**
+     * Accessor Methods
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public String getIssue() {
+        return issue;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public int getTriageLevel() {
+        return triageLevel;
+    }
+
+    public String getDoctor() {
+        return doctor;
+    }
+
+    /**
+     * Mutator Methods
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    /**
+     *
+     * Sets the Date of Birth of the Patient
+     *
+     * @param dob The new date of birth of the Patient. Must not be in the future
+     *
+     * @throws IllegalArgumentException If the dob is in the past.
+     */
+    public void setDob(LocalDate dob) {
+        if (dob.compareTo(LocalDate.now()) > 0) {
+            throw new IllegalArgumentException("Date of Birth must be in the past");
+        }
+        this.dob = dob;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
+    /**
+     *
+     * Sets the Date of the Appointment
+     *
+     * @param date The new date of the Appointment. Must be in the future
+     *
+     * @throws IllegalArgumentException If the date being set is in the past.
+     */
+    public void setDate(LocalDate date) {
+        if (date.compareTo(LocalDate.now()) < 0) {
+            throw new IllegalArgumentException("Appointment Date must be after today");
+        }
+        this.date = date;
+    }
+
+    public void setTriageLevel(int triageLevel) {
+        this.triageLevel = triageLevel;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
     }
 
 
