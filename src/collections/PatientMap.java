@@ -50,11 +50,11 @@ public class PatientMap
 
     /**
      Computes the hash code for a given key.
-     @param key the key to be hashed
      @return the hash code for the key
+      * @param key the key to be hashed
      */
-    private int hash(String key){
-        int hash = key.hashCode();
+    private int hash(int key){
+        int hash = Integer.hashCode(key);
         hash = Math.abs(hash);
         hash = hash % data.length;
         return hash;
@@ -62,14 +62,14 @@ public class PatientMap
 
     /**
      Adds a key-value pair to the map.
-     @param key the key for the data
-     @param value the data to be stored
      @return the previous value associated with the key, or null if the key is not present
      @throws IllegalArgumentException if either key or value is null
      @throws SlotOccupiedException if the provided key maps to an occupied slot in the map
+      * @param key the key for the data
+     * @param value the data to be stored
      */
-    public String put(String key, String value){
-        if(key == null || value == null){
+    public Patient put(int key, Patient value){
+        if(key == 0 || value == null){
             throw new IllegalArgumentException("Null fields not permitted");
         }
         if(size == data.length){
@@ -87,8 +87,8 @@ public class PatientMap
             size++;
             return null;
         }else{
-            if(data[slot].key.equals(key)){
-                String oldValue = data[slot].updateValue(value);
+            if(key == data[slot].key){
+                Patient oldValue = data[slot].updateValue(value);
                 return oldValue;
             }else{
                 throw new SlotOccupiedException("Provided key maps to occupied slot in map.");
@@ -101,7 +101,7 @@ public class PatientMap
      @param key the key for the data
      @return the data associated with the key, or null if the key is not present
      */
-    public String get(String key){
+    public Patient get(int key){
         int slot = hash(key);
         if(data[slot] != null){
             return data[slot].value;
@@ -119,8 +119,8 @@ public class PatientMap
     private Entry[] growMap(){
         Entry[] newMap = new Entry[data.length*2];
         for(int i = 0; i < data.length; i++){
-            String key = data[i].key;
-            int slot = key.hashCode();
+            int key = data[i].key;
+            int slot = key;
             slot = Math.abs(slot);
             slot = slot % newMap.length;
             if(newMap[slot] != null){
@@ -132,20 +132,26 @@ public class PatientMap
         return newMap;
     }
 
-    public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName , String DOB) {
-        // Construct the key by concatenating first and last name
-        String key = firstName + " " + lastName;
+//    public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName , String DOB) {
+//        // Construct the key by concatenating first and last name
+//        String key = firstName + " " + lastName;
+//
+//        // Use the remove() method to remove the entry with the given key
+//        Patient removedPatient = patientMap.remove(key);
+//
+//        // Check if the remove() method returned a non-null value, indicating that a patient was removed
+//        if (removedPatient != null) {
+//            System.out.println("Patient " + firstName + " " + lastName + " has been removed successfully.");
+//        } else {
+//            System.out.println("Patient " + firstName + " " + lastName + " was not found in the system.");
+//        }
+//    }
 
+    public void removePatient(HashMap<String, Patient> patientMap, int key) {
         // Use the remove() method to remove the entry with the given key
         Patient removedPatient = patientMap.remove(key);
-
-        // Check if the remove() method returned a non-null value, indicating that a patient was removed
-        if (removedPatient != null) {
-            System.out.println("Patient " + firstName + " " + lastName + " has been removed successfully.");
-        } else {
-            System.out.println("Patient " + firstName + " " + lastName + " was not found in the system.");
-        }
     }
+
     public void displayAllPatients(HashMap<String, Patient> patientMap) {
         for (Patient patient : patientMap.values()) {
             System.out.println(patient);
@@ -160,16 +166,16 @@ public class PatientMap
      */
     private static class Entry{
         // The key associated with this entry.
-        private final String key;
+        private final int key;
         // The value associated with this entry.
-        private String value;
+        private Patient value;
 
         /**
          Constructs a new Entry object with the specified key and value.
-         @param key the key to be associated with this entry.
-         @param value the value to be associated with this entry.
+         * @param key the key to be associated with this entry.
+         * @param value the value to be associated with this entry.
          */
-        public Entry(String key, String value){
+        public Entry(int key, Patient value){
             this.key = key;
             this.value = value;
         }
@@ -178,7 +184,7 @@ public class PatientMap
          Returns the key associated with this entry.
          @return the key associated with this entry.
          */
-        public String getKey(){
+        public int getKey(){
             return key;
         }
 
@@ -186,17 +192,17 @@ public class PatientMap
          Returns the value associated with this entry.
          @return the value associated with this entry.
          */
-        public String getValue(){
+        public Patient getValue(){
             return value;
         }
 
         /**
          Updates the value associated with this entry and returns the old value.
-         @param newValue the new value to be associated with this entry.
          @return the old value associated with this entry.
+          * @param newValue the new value to be associated with this entry.
          */
-        public String updateValue(String newValue){
-            String oldValue = value;
+        public Patient updateValue(Patient newValue){
+            Patient oldValue = value;
             this.value = newValue;
             return oldValue;
         }

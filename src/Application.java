@@ -90,14 +90,13 @@ public class Application
                         DOB = scanner.next();
 
                          dob = LocalDate.parse(DOB);
-                        PatientMap patientDeleted = new PatientMap();
 
-                        patientDeleted.removePatient(patient, firstName,lastName,DOB);
+                        Patient patient1 = new Patient(firstName, lastName, dob, LocalDate.now(), new PriorityQueue());
 
-
-                        if (!patient.equals(firstName)) {
+                        try {
+                            PatientMap.removePatient(patient1,1);
                             System.out.println("Patient has been deleted successfully.");
-                        } else {
+                        } catch (PatientNotFoundException e) {
                             System.out.println("ERROR - patient has not been deleted from the practice.");
                         }
 
