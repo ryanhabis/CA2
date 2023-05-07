@@ -7,6 +7,10 @@ public class AppointmentLinkedList {
     protected Node first;
     protected Node last;
 
+    /**
+     * An AppointmentLinkedList class setting first and last
+     * Nodes to null
+     */
     public AppointmentLinkedList() {
         first = null;
         last = null;
@@ -15,7 +19,7 @@ public class AppointmentLinkedList {
     /**
      * a method called size, which returns the lists capacity
      *
-     * @return numElements, the number of elements stored in the list
+     * @return numElements, the number of Appointments stored in the list
      */
     public int size() {
         return numElements;
@@ -23,7 +27,7 @@ public class AppointmentLinkedList {
 
     /**
      *
-     * Returns the element at the specified position in the List.
+     * Returns the Appointment at the specified position in the List.
      *
      * @param pos the position of the Appointment to be returned.
      * @return the Appointment at the specified position.
@@ -31,7 +35,7 @@ public class AppointmentLinkedList {
      */
     public Appointment get(int pos) {
         if (isEmpty() || pos >= numElements || pos < 0) {
-            throw new IndexOutOfBoundsException("Invalid position supplied");
+            throw new IndexOutOfBoundsException("Invalid position supplied, Appointment not found");
         } else {
             Node current = first;
             for (int i = 0; i < pos; i++) {
@@ -64,8 +68,19 @@ public class AppointmentLinkedList {
         }
         return -1;
     }
-
-    public Appointment set(Appointment str, int pos) {
+    /**
+     * set, where pos is validated and if not an IndexOutOfBoundsException is thrown otherwise,
+     *      then it tranverses through the Node links, until it reaches the pos supplied
+     *      where an Appointment object called temp is created and is set to the current Node
+     *      and the current node is set to the new Appointment and the temp is returned
+     *
+     * @param app, the Appointment which will be set at the appropiate position
+     * @param pos, the position of the list which to set the new Appointment
+     *
+     * @return temp, which is the old Appointment object comfirming the set method
+     *               worked correctly
+     */
+    public Appointment set(Appointment app, int pos) {
         if (pos >= numElements || pos < 0) {
             throw new IndexOutOfBoundsException("Invalid position supplied");
         }
@@ -74,19 +89,18 @@ public class AppointmentLinkedList {
             current = current.next;
         }
         Appointment temp = current.data;
-        current.data = temp;
+        current.data = app;
         return temp;
     }
 
 
 
     /**
-     * Inserts the specified element into the queue.
+     * Inserts the specified element into the List, which is at the end of th.
+     * The number of elements will be updated
      *
-     * @param data the element to be inserted.
+     * @param data the Appointment to be inserted.
      * @return true,if the element was successfully inserted, otherwise false.
-     * @throws DuplicateAppointmentException if the Appointment already exists in
-     *                                       the List.
      */
     public boolean add(Appointment data) throws DuplicateAppointmentException {
         Node newNode = new Node(data);
@@ -103,10 +117,13 @@ public class AppointmentLinkedList {
 
     /**
      *
-     * Removes and returns the first element in the List.
+     * Removes and returns the first instance of the Appointment in the List.
+     * By tranversing the node Links checking the first Node and if so it is deleted.
+     * Then it tranverses the rest of the links, true is returned if the Appointment is found
+     * The number of elements was updated
      *
-     * @return the first element in the List.
-     * @throws NoSuchElementException if the List is empty.
+     * @param data, the Appointment to remove from the List
+     * @return isRemoved, true if the Appointment has been removed, false if it hasnt.
      */
     public boolean remove(Appointment data) {
         boolean isRemoved = false;
@@ -138,6 +155,7 @@ public class AppointmentLinkedList {
     public boolean isEmpty() {
         return numElements == 0;
     }
+
     protected static class Node {
         protected Appointment data;
         protected Node next;
