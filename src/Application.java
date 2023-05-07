@@ -6,13 +6,13 @@ import utils.Appointment;
 import utils.Patient;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Application
 {
+    private static int id = 0;
+    private static int niqueID;
+//    private int niqueID;
     public static void main(String[] args) throws FileNotFoundException
     {
         /**
@@ -32,14 +32,15 @@ public class Application
 
         Scanner scanner = new Scanner(System.in);
         String[] menuOptions = {
-                "0. Add a new patient to the practice",
-                "1. Delete a patient from the practice",
-                "2. Display all patients",
-                "3. Create a new appointment for a specific patient and add it to the queue",
-                "4. Call the next patient in",
-                "5. Exit",
+                "1. Add a new patient to the practice",
+                "2. Delete a patient from the practice",
+                "3. Display all patients",
+                "4. Create a new appointment for a specific patient and add it to the queue",
+                "5. Call the next patient in",
+                "6. Exit",
         };
 
+        PatientMap patientMap = new PatientMap();
         int menuChoice = -1;
         do {
             displayMenu(menuOptions, "Hospital menu");
@@ -71,6 +72,9 @@ public class Application
 
                         if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))
                         {
+                            id++;
+                            niqueID= id;
+                            patientMap.put(niqueID,patient);
                             System.out.println("Patient " + firstName + " has been added successfully.");
                         }
                         else
@@ -93,16 +97,23 @@ public class Application
 
                         Patient patient1 = new Patient(firstName, lastName, dob, LocalDate.now(), new PriorityQueue());
 
-                        try {
-                            PatientMap.removePatient(patient1,1);
-                            System.out.println("Patient has been deleted successfully.");
-                        } catch (PatientNotFoundException e) {
-                            System.out.println("ERROR - patient has not been deleted from the practice.");
+                        if (patientMap.containsPatient(patient1.hashCode() ,patient1)) {
+                            Patient patientToDelete = patientMap.get(patient1.hashCode());
+                            if (patientToDelete.getFirstName().equals(firstName) &&
+                                    patientToDelete.getSurName().equals(lastName) &&
+                                    patientToDelete.getDob().equals(dob)) {
+                                patientMap.removePatient(patient1);
+                                System.out.println("Patient has been deleted successfully.");
+                            } else {
+                                System.out.println("ERROR - patient has not been deleted from the practice.");
+                            }
+                        } else {
+                            System.out.println("ERROR - patient not found.");
                         }
+
 
                         break;
                     case 3:
-                        HashMap<String, Patient> patientMap = new HashMap<>();
                         // populate the map with patients
 
                         PatientMap patientManager = new PatientMap();

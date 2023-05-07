@@ -16,16 +16,16 @@ public class PatientMap
     private static final int DEFAULT_CAPACITY = 103;
     private Entry[] data;
     private int size;
-    private HashMap<String, Patient> patientMap = new HashMap<>();
-
-
-
+    private static HashMap<Integer, Patient> patientMap = new HashMap<>();
+    private static int id = 0;
+    private int niqueID;
     /**
      Constructor for collections.PatientMap class with default capacity.
      */
     public PatientMap() {
         data = new Entry[DEFAULT_CAPACITY];
-
+        id++;
+        niqueID= id;
     }
 
     /**
@@ -48,6 +48,7 @@ public class PatientMap
         return size;
     }
 
+
     /**
      Computes the hash code for a given key.
      @return the hash code for the key
@@ -60,6 +61,9 @@ public class PatientMap
         return hash;
     }
 
+    public void addPatient(Patient patient) {
+        patientMap.put(niqueID, patient);
+    }
     /**
      Adds a key-value pair to the map.
      @return the previous value associated with the key, or null if the key is not present
@@ -96,10 +100,11 @@ public class PatientMap
         }
     }
 
+
     /**
      Retrieves the value associated with the given key.
-     @param key the key for the data
      @return the data associated with the key, or null if the key is not present
+      * @param key the key for the data
      */
     public Patient get(int key){
         int slot = hash(key);
@@ -111,7 +116,6 @@ public class PatientMap
     }
 
 /**
-
  Resizes the map to twice its current size.
  @return the new, resized map
  @throws MapFullException if there is no space to store the data after resizing
@@ -132,30 +136,27 @@ public class PatientMap
         return newMap;
     }
 
-//    public void removePatient(HashMap<String, Patient> patientMap, String firstName, String lastName , String DOB) {
-//        // Construct the key by concatenating first and last name
-//        String key = firstName + " " + lastName;
-//
-//        // Use the remove() method to remove the entry with the given key
-//        Patient removedPatient = patientMap.remove(key);
-//
-//        // Check if the remove() method returned a non-null value, indicating that a patient was removed
-//        if (removedPatient != null) {
-//            System.out.println("Patient " + firstName + " " + lastName + " has been removed successfully.");
-//        } else {
-//            System.out.println("Patient " + firstName + " " + lastName + " was not found in the system.");
-//        }
-//    }
 
-    public void removePatient(HashMap<String, Patient> patientMap, int key) {
+
+    public static void removePatient(Patient key) {
         // Use the remove() method to remove the entry with the given key
-        Patient removedPatient = patientMap.remove(key);
+        Patient removedPatient = patientMap.remove(key.getFirstName() + key.getSurName() + key.getDob().toString());
     }
 
-    public void displayAllPatients(HashMap<String, Patient> patientMap) {
-        for (Patient patient : patientMap.values()) {
-            System.out.println(patient);
+    public boolean containsPatient(int key, Patient patient) {
+        if (patientMap.containsKey(key)) {
+            Patient storedPatient = patientMap.get(key);
+            return storedPatient.equals(patient);
+        } else {
+            return false;
         }
+    }
+
+
+    public void displayAllPatients(PatientMap patientMap) {
+//        for (Patient patient : patientMap.getValue()) {
+//            System.out.println(patient);
+//        }
     }
 
 
@@ -184,7 +185,8 @@ public class PatientMap
          Returns the key associated with this entry.
          @return the key associated with this entry.
          */
-        public int getKey(){
+        public int getKey()
+        {
             return key;
         }
 
@@ -211,3 +213,4 @@ public class PatientMap
 
     }
 }
+
