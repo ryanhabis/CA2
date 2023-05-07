@@ -1,3 +1,5 @@
+package collections;
+
 import utils.Appointment;
 
 import java.util.NoSuchElementException;
@@ -8,7 +10,7 @@ public class AppointmentLinkedList {
     protected Node last;
 
     /**
-     * An AppointmentLinkedList class setting first and last
+     * An collections.AppointmentLinkedList class setting first and last
      * Nodes to null
      */
     public AppointmentLinkedList() {
