@@ -1,6 +1,11 @@
 package utils;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
+/**
+ * owner: Conor Garvey
+ */
 
 public class Appointment implements Comparable<Appointment> {
     //	This is a paired project to manage patients, their appointments and their appointment history. It is designed to test that you can
@@ -141,6 +146,62 @@ public class Appointment implements Comparable<Appointment> {
 
     public void setDoctor(String doctor) {
         this.doctor = doctor;
+    }
+
+    /**
+     *
+     * Computes the hash code of the Appointment based on Patient data,
+     * Appointment issue and date
+     *
+     * @return The hash code of this Appointment.
+     */
+    @Override
+    public int hashCode() {
+        int hash = 8;
+        hash = 90 * hash + Objects.hashCode(this.firstName);
+        hash = 90 * hash + Objects.hashCode(this.surName);
+        hash = 90 * hash + Objects.hashCode(this.dob);
+        hash = 90 * hash + Objects.hashCode(this.issue);
+        hash = 90 * hash + Objects.hashCode(this.date);
+        return hash;
+    }
+
+    /**
+     *
+     * Determines whether this Appointment is equal to another object based on their
+     * Patient Data, issue, and date.
+     *
+     * @param obj The other object to compare with.
+     * @return {true} if the Appointment objects are equal, {false} otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Appointment other = (Appointment) obj;
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.surName, other.surName)) {
+            return false;
+        }
+        if (!Objects.equals(this.dob, other.dob)) {
+            return false;
+        }
+        if (!Objects.equals(this.issue, other.issue)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        return true;
     }
 
 
