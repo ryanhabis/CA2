@@ -1,10 +1,9 @@
 import collections.AppointmentLinkedList;
-import utils.Appointment;
+import collections.PatientMap;
 import utils.Patient;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Application
@@ -63,7 +62,7 @@ public class Application
                         System.out.println("last name");
                         lastName = scanner.next();
 
-                        System.out.println("Date of birth within this format (2023-01-01)");
+                        System.out.println("Date of birth within this format (year-month-day)");
                         DOB = scanner.next();
 
                         LocalDate dob = LocalDate.parse(DOB);

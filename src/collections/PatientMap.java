@@ -1,9 +1,13 @@
+package collections;
+
+import Exceptions.MapFullException;
+import Exceptions.SlotOccupiedException;
 import utils.Patient;
 
 import java.util.HashMap;
 
 /**
- The PatientMap class implements a hash map data structure to store patient data. The class supports adding and
+ The collections.PatientMap class implements a hash map data structure to store patient data. The class supports adding and
  retrieving patient data using key-value pairs.
  */
 
@@ -16,7 +20,7 @@ public class PatientMap
 
 
     /**
-     Constructor for PatientMap class with default capacity.
+     Constructor for collections.PatientMap class with default capacity.
      */
     public PatientMap() {
         data = new Entry[DEFAULT_CAPACITY];
@@ -24,7 +28,7 @@ public class PatientMap
     }
 
     /**
-     Constructor for PatientMap class with user-defined capacity.
+     Constructor for collections.PatientMap class with user-defined capacity.
      @param capacity the maximum capacity of the map
      @throws IllegalArgumentException if capacity is less than or equal to zero
      */
@@ -142,7 +146,7 @@ public class PatientMap
         }
     }
     /**
-     This is a static inner class representing an entry in the PatientMap.
+     This is a static inner class representing an entry in the collections.PatientMap.
      Each Entry object contains a key-value pair.
      */
     private static class Entry{
