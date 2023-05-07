@@ -1,7 +1,10 @@
 package utils;
 
+
+
+import collections.AppointmentLinkedList;
+
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.Objects;
 
 public class Patient {
@@ -9,9 +12,9 @@ public class Patient {
     private String surName;
     private LocalDate dob;
     private LocalDate date;
-    private LinkedList appointment;
+    private AppointmentLinkedList appointment;
 
-    public Patient(String firstName, String surName, LocalDate dob, LocalDate date, LinkedList appointment) {
+    public Patient(String firstName, String surName, LocalDate dob, LocalDate date, AppointmentLinkedList appointment) {
         if (dob.compareTo(LocalDate.now()) > 0) {
             throw new IllegalArgumentException("Date of Birth cannot be after today");
         } else if (date.compareTo(LocalDate.now()) > 0) {
@@ -53,7 +56,7 @@ public class Patient {
     }
 
 
-    public LinkedList getAppointment() {
+    public AppointmentLinkedList getAppointment() {
         return appointment;
     }
 
@@ -83,7 +86,7 @@ public class Patient {
         this.dob = dob;
     }
 
-    public void setAppointment(LinkedList appointment) {
+    public void setAppointment(AppointmentLinkedList appointment) {
         this.appointment = appointment;
     }
 
