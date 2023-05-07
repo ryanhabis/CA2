@@ -1,8 +1,10 @@
 import collections.AppointmentLinkedList;
+import collections.PatientMap;
 import utils.Appointment;
 import utils.Patient;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -44,6 +46,7 @@ public class Application
                 String lastName;
                 // DOB stands for Date of Birth
                 String DOB;
+                PatientMap patientMap = new PatientMap();
                 menuChoice = getMenuChoice(menuOptions.length);
                 switch (menuChoice) {
                     case 1:
@@ -68,7 +71,7 @@ public class Application
 
                         LocalDate dob = LocalDate.parse(DOB);
                         LocalDate signUpDate = LocalDate.now();
-                        AppointmentLinkedList appointments = new AppointmentLinkedList();
+                        LinkedList appointments = new LinkedList();
                         Patient patient = new Patient(firstName, lastName, dob, signUpDate, appointments);
 
                         if (patient.equals(new Patient(firstName, lastName, dob, signUpDate, appointments)))
@@ -92,20 +95,10 @@ public class Application
                         DOB = scanner.next();
 
                          dob = LocalDate.parse(DOB);
+                        PatientMap patientDeleted = new PatientMap();
 
-                         // not working
-                        boolean patientDeleted = false;
-                        for (Patient pat : patients) {
-                            if (pat.getFirstName().equals(firstName) &&
-                                    pat.getSurName().equals(lastName) &&
-                                    pat.getDob().equals(dob)) {
-                                patients.remove(pat);
-                                patientDeleted = true;
-                                break;
-                            }
-                        }
-
-                        if (patientDeleted) {
+                        patientDeleted.removePatient(patient, firstName,lastName,DOB);
+                        if (!patient.equals(firstName)) {
                             System.out.println("Patient has been deleted successfully.");
                         } else {
                             System.out.println("ERROR - patient has not been deleted from the practice.");
@@ -115,17 +108,7 @@ public class Application
                     case 3:
                         // Display all patients
                         System.out.println("List of patients:");
-
-                        //broken forloop
-                        for (Patient pat : patients) {
-                            System.out.println("First Name: " + pat.getFirstName());
-                            System.out.println("Last Name: " + pat.getSurName());
-                            System.out.println("Date of Birth: " + pat.getDob());
-                            System.out.println("Sign Up Date: " + pat.getDate());
-                            System.out.println("Appointments: " + pat.getAppointment());
-                            System.out.println("---------------------------------------");
-                        }
-
+                        patient.displayAllPatients();
                         break;
                     case 4:
                         // Create a new appointment for a specific patient and add it to the queue
